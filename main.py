@@ -9,7 +9,7 @@ CHAT_ID = os.getenv("CHAT_ID")
 SYMBOLS = ["BTC/USDT", "ETH/USDT", "SOL/USDT", "LTC/USDT"]
 TIMEFRAME = "4h"
 
-exchange = ccxt.binance({'enableRateLimit': True})
+exchange = ccxt.bybit({'enableRateLimit': True})
 
 def send_telegram(msg):
     url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
