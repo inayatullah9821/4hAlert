@@ -1,24 +1,23 @@
 name: HTF 4H Alerts
 
 on:
+  push:
+    branches: [ "master" ]   # run on every push (TEMP)
+  workflow_dispatch:
   schedule:
-    - cron: "1 0,4,8,12,16,20 * * *"   # Runs 1 min after each 4H close (UTC)
-  workflow_dispatch:   # allows manual run from GitHub UI
+    - cron: "1 0,4,8,12,16,20 * * *"
 
 jobs:
   run-alert:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.10"
-
       - name: Install dependencies
         run: pip install -r requirements.txt
-
       - name: Run alert bot
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
